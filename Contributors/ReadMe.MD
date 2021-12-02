@@ -13,7 +13,7 @@ This way, for each branch, team members can quickly understand what each other h
 
 This [stackoverflow](https://stackoverflow.com/questions/55240330/how-to-read-csv-file-from-github-using-pandas) describes how to read a csv file directly from GitHub. The following code can be used for our sample dataset:
 
-    url = 'https://github.com/jgeorge313/DS_GA_1001_Capstone/blob/main/Levels_Fyi_Salary_Data.csv'
+    url = 'https://raw.githubusercontent.com/jgeorge313/DS_GA_1001_Capstone/main/Levels_Fyi_Salary_Data.csv'
     data = pd.read_csv(url)
     
 ### Running scripts in Jupyter notebook
