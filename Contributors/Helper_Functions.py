@@ -139,7 +139,7 @@ def hypothesis_data_3(data_frame, cutoff_array):
             levels_of_experience += new_list
             i-=1
     if i == 0:
-        new_list =  [len(cutoff_array)] * (len(df) - cutoffs[-1])
+        new_list =  [len(cutoff_array)] * (len(data_frame) - cutoffs[-1])
         levels_of_experience += new_list
         
     new_data_frame = data_frame.sort_values('yearsofexperience', ascending = True)
@@ -150,12 +150,12 @@ def hypothesis_data_3(data_frame, cutoff_array):
     region_keys.remove('NA')
 
 
-    buckets = list(set(new_df['levels_of_experience'].values.tolist()))
+    buckets = list(set(new_data_frame['levels_of_experience'].values.tolist()))
 
     final_keys =  list(itertools.product(region_keys, buckets))
     big_list = []
     for value in final_keys:
-        big_list.append(new_df.loc[(new_df['region']== value[0]) & (new_df['levels_of_experience']== value[1])]['totalyearlycompensation'].tolist())
+        big_list.append(new_df.loc[(new_data_frame['region']== value[0]) & (new_data_frame['levels_of_experience']== value[1])]['totalyearlycompensation'].tolist())
 
     final_dict = dict(zip(final_keys, big_list))
     
