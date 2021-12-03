@@ -7,8 +7,8 @@ DS GA 1001 Capstone Project
 
 Changelog:
     v0: Joby initialized the file
-    v1: x person inputted y functions
-    v2:
+    v1: Jonah person inputted percentile breaker and control for experience functions
+    v2: Joby created extract state function
     ...
 """
 
@@ -46,3 +46,25 @@ def control_for_experience(df, buckets):
     
     return (cutoffs)
         
+def extract_state(data_frame):
+    """
+    take the salaries dataframe and extract the state from locations
+    if the location is not in the US fill with NA
+    return a dataframe with the column state
+    """
+    location_list = data['location'].values.tolist()
+    fifty_state_list=['SD','PA','WV','MO','MT','NE','NV','NH','NJ','NM','NY','SC','NC','ND',
+                'OH','OK','OR','TX','AL','VA','WI','RI','TN','WA','UT','VT','KY','IN',
+                'MS','AK','AZ','AR','CA','CO','CT','DE','DC','KS','FL','GA','HI','ID',
+                'IL','ME','WY','MI','LA','IA','MN','MA','MD']
+    location_list = data['location'].values.tolist()
+    state_list = [location.split(',')[1].strip() for location in location_list]
+    new_state_list = []
+    for value in state_list:
+        if value not in fifty_state_list:
+            print(value)
+            new_state_list.append('NA')
+        else:
+            new_state_list.append(value)
+    data_frame['state'] = new_state_list
+    return(data_frame)
