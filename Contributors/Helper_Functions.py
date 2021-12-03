@@ -74,7 +74,6 @@ def gender_control_experience_buckets(df, bucket_list):
     return (final_dict)
         
 def extract_state(data_frame):
-def extract_state(data_frame):
     """
     take the salaries dataframe and extract the state from locations
     if the location is not in the US fill with NA
