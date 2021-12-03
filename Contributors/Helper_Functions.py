@@ -395,12 +395,10 @@ def tech_and_finance_salary_test(df):
             print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
 
 def pca(data, stand=False, k=None, var=False):
-
-    cols = list(data.iloc[:0])
+    #Create a copy of data
     data_copy = data
-    # Center Data at 0, Each Column must have mean 0
     
-    # Loop through every column
+    # Center Data at 0, Each Column must have mean 0
     data_copy = data - data.mean()
 
     # If we should standardize, then standardize the dataset
