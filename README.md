@@ -18,15 +18,17 @@ To further refine our understanding we will investigate the following questions:
 
 ## Specific Questions
 
-    1) for when we have gender, do men make more than women when controlling for experience
-    2) do larger companies pay more
-    3) which locations have smaller companies
-    4) highest total pay by location
-    5) do people with high v low years at current co make more
-    6) Has the median annual salary increase for Data Science/Software Engineer increased more than annual inflation between 2017-2019
-    1) predict salary from other factors
-    2) predict experience level from salary
-    3) predict company from salary info
+    1) For when we have gender, do men make more than women when controlling for experience (Jonah)
+    2) Highest total pay by location (Joby)
+    3) Do people with high v low years at current co make more (Alex)
+    4) Has the median annual salary increase for Data Science/Software Engineer increased more than annual inflation between 2017-2019
+    5) How many years of experience is a Master's Degree worth (Howell)
+    6) FAANG vs Non-FAANG (Tech) (Alex)
+    7) Finance vs FAANG (Giulio)
+
+    1) Predict salary from other factors
+    2) Predict experience level from salary
+    3) Predict company from salary info
     see how we perform on prediction when we drop some of these factors
 
 
