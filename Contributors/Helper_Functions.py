@@ -11,3 +11,16 @@ Changelog:
     v2:
     ...
 """
+
+import math
+def percentile_breaker(df, percentile_break, col_name):
+    #breaks sorted dataset on a certain percentile...this will be useful for testing salaries at small v large companies, ask Jonah for more info
+    #returns dataframe split at proper percentile
+    
+    percentile_break = percentile_break/100
+    breakpoint = math.ceil(percentile_break*df.shape[0])
+    df= df.sort_values(col_name)
+    group_1 = df.iloc[:breakpoint,:]
+    group_2 = df.iloc[breakpoint:,:]
+    
+    return(group_1, group_2) 
