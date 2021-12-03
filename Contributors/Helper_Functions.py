@@ -74,26 +74,41 @@ def gender_control_experience_buckets(df, bucket_list):
     return (final_dict)
         
 def extract_state(data_frame):
+def extract_state(data_frame):
     """
     take the salaries dataframe and extract the state from locations
     if the location is not in the US fill with NA
     return a dataframe with the column state
     """
-    location_list = data['location'].values.tolist()
-    fifty_state_list=['SD','PA','WV','MO','MT','NE','NV','NH','NJ','NM','NY','SC','NC','ND',
-                'OH','OK','OR','TX','AL','VA','WI','RI','TN','WA','UT','VT','KY','IN',
-                'MS','AK','AZ','AR','CA','CO','CT','DE','DC','KS','FL','GA','HI','ID',
-                'IL','ME','WY','MI','LA','IA','MN','MA','MD']
-    location_list = data['location'].values.tolist()
+    fifty_state_list = ['AK','AL','AR','AZ','CA','CO','CT',
+                  'DC','DE','FL','GA','HI','IA','ID','IL','IN','KS','KY','LA','MA','MD','ME','MI','MN','MO','MS',
+                  'MT','NC','ND','NE','NH','NJ','NM','NV','NY','OH','OK','OR','PA',
+                  'RI','SC','SD','TN','TX','UT','VA','VT','WA','WI','WV','WY']
+
+    region_list = ['West','South','South','West','West','West','Northeast','South','South',
+                   'South','South','West','Midwest','West','Midwest','Midwest',
+                   'Midwest','South','South','Northeast','South','Northeast',
+                   'Midwest','Midwest','Midwest','South','West','South','Midwest',
+                   'Midwest','Northeast','Northeast','West','West','Northeast',
+                   'Midwest','South','West','Northeast','Northeast','South',
+                   'Midwest','South','South','West','South','Northeast',
+                   'West','Midwest','South','West']
+    
+    geo_dict = dict(zip(fifty_state_list, region_list))
+
+    location_list = data_frame['location'].values.tolist()
     state_list = [location.split(',')[1].strip() for location in location_list]
-    new_state_list = []
+    new_state_list, new_region_list  = [], []
     for value in state_list:
         if value not in fifty_state_list:
-            print(value)
             new_state_list.append('NA')
+            new_region_list.append('NA')
         else:
             new_state_list.append(value)
-    data_frame['state_cleaned'] = new_state_list
+            new_region_list.append(geo_dict[value])
+    data_frame['state_clean'] = new_state_list
+    data_frame['region'] = new_region_list
+
     return(data_frame)
 
 
