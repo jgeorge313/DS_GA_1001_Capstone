@@ -162,11 +162,10 @@ def hypothesis_data_3(data_frame, cutoff_array):
     return(final_dict)
 
 
-
 # Takes a dataframe, filter column and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
-def control_column(df, control_column, filter_column, return_column, cutoffs):
+def hypothesis_data1(df, control_column, filter_column, return_column, cutoffs):
     dict_ = {}
-    cutoffs = [0] + cutoffs + [max(df[filter_column])]
+    cutoffs = [0] + cutoffs + [max(df[control_column])]
     
     for i in range(0, len(cutoffs)-1):
         temp = df[(df[control_column].between(cutoffs[i], cutoffs[i+1], inclusive='left'))]
@@ -174,5 +173,21 @@ def control_column(df, control_column, filter_column, return_column, cutoffs):
         high = temp[temp[filter_column] > temp[filter_column].median()][return_column]
         
         dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [low, high]
+    
+    return dict_
+
+
+# Takes a dataframe, filter columns and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
+def hypothesis_data2(df, control_column1, control_column2, filter_column, return_column, cutoffs):
+    dict_ = {}
+    cutoffs = [0] + cutoffs + [max(df[control_column1])]
+    faang_list = ['Facebook', 'Apple', 'Amazon', 'Netflix', 'Google']
+    
+    for i in range(0, len(cutoffs)-1):
+        temp = df[(df[control_column1].between(cutoffs[i], cutoffs[i+1], inclusive='left')) & (df[control_column2] == 'Technology')]
+        faang = temp[temp[filter_column].isin(faang_list)][return_column]
+        nonfaang_tech = temp[~temp[filter_column].isin(faang_list)][return_column]
+        
+        dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [faang, nonfaang_tech]
     
     return dict_
