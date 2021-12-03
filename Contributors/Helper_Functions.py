@@ -66,5 +66,5 @@ def extract_state(data_frame):
             new_state_list.append('NA')
         else:
             new_state_list.append(value)
-    data_frame['state'] = new_state_list
+    data_frame['state_cleaned'] = new_state_list
     return(data_frame)
