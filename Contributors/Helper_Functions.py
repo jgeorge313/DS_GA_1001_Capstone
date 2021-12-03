@@ -9,6 +9,8 @@ Changelog:
     v0: Joby initialized the file
     v1: Jonah person inputted percentile breaker and control for experience functions
     v2: Joby created extract state function
+    v3: Alex and Jonah created awesome function to get us dictionary's of that contain sub-groups we want to perform hypothesis on testing on
+    v4. Joby created function that outputs a dictionary that outputs regional salaries, controlling for experience
     ...
 """
 
@@ -109,6 +111,54 @@ def extract_state(data_frame):
     data_frame['region'] = new_region_list
 
     return(data_frame)
+
+def create_regional_salary_arrays(data_frame, cutoff_array):
+    """
+    takes in a dataframe and creates a region column for the data, if it does not exist continue,
+    input an array to look at experience cutoff groups and then return a dictionary that 
+    has a key of the region and the experience group, with associated value of an array
+    of the total yearly compensation for all employees in that region and experience group 
+    """
+    if 'region' in data_frame:
+        pass
+    else:
+        new_data_frame = extract_state(data_frame).sort_values('yearsofexperience', ascending = True)
+        
+    cutoffs = control_for_experience(df, cutoff_array)
+    
+    i = len(cutoff_array)
+    
+    while i > 0:
+        if i == len(cutoff_array):
+            levels_of_experience = ['0'] * cutoffs[len(cutoff_array) - i]
+            i-=1
+        else:
+            new_list =  [len(cutoff_array) - i] * (cutoffs[len(cutoff_array)-i]-cutoffs[len(cutoff_array)-i-1])
+            levels_of_experience += new_list
+            i-=1
+    if i == 0:
+        new_list =  [len(cutoff_array)] * (len(df) - cutoffs[-1])
+        levels_of_experience += new_list
+        
+    new_data_frame = data_frame.sort_values('yearsofexperience', ascending = True)
+    new_data_frame['levels_of_experience'] = levels_of_experience    
+    region_keys = list(set(dataframe['region'].values.tolist()))[0:4]
+    buckets = [0,1,2,3]
+    region_keys = list(set(new_df['region'].values.tolist()))
+    region_keys.remove('NA')
+
+
+    buckets = list(set(new_df['levels_of_experience'].values.tolist()))
+
+    final_keys =  list(itertools.product(region_keys, buckets))
+    big_list = []
+    for value in final_keys:
+        big_list.append(new_df.loc[(new_df['region']== value[0]) & (new_df['levels_of_experience']== value[1])]['totalyearlycompensation'].tolist())
+
+    final_dict = dict(zip(final_keys, big_list))
+    
+    return(final_dict)
+
 
 
 # Takes a dataframe, filter column and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
