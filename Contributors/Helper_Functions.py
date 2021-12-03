@@ -112,7 +112,8 @@ def extract_state(data_frame):
             new_region_list.append(geo_dict[value])
     data_frame['state_clean'] = new_state_list
     data_frame['region'] = new_region_list
-
+    data_frame.loc[data_frame['state_clean']!='NA']
+  
     return(data_frame)
 
 def hypothesis_data_3(data_frame, cutoff_array):
