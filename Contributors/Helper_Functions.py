@@ -15,6 +15,8 @@ Changelog:
 """
 
 import math
+import itertools 
+
 def percentile_breaker(df, percentile_break, col_name):
     #breaks sorted dataset on a certain percentile...this will be useful for testing salaries at small v large companies, ask Jonah for more info
     #returns dataframe split at proper percentile
@@ -112,7 +114,7 @@ def extract_state(data_frame):
 
     return(data_frame)
 
-def create_regional_salary_arrays(data_frame, cutoff_array):
+def hypothesis_data_3(data_frame, cutoff_array):
     """
     takes in a dataframe and creates a region column for the data, if it does not exist continue,
     input an array to look at experience cutoff groups and then return a dictionary that 
