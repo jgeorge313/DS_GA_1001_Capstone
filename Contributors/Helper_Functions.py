@@ -195,7 +195,7 @@ def hypothesis_data2(df, control_column1, control_column2, filter_column, return
 #Uses Sector Dict
 def match_industry(df):
     for i in sector_dict:
-        df.loc[raw_df.company==str(i),'sector'] = sector_dict[i]
+        df.loc[df.company==str(i),'sector'] = sector_dict[i]
     return df
 
 #Sector_dict used for match_industry
