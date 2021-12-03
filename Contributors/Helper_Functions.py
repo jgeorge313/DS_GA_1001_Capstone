@@ -95,3 +95,14 @@ def extract_state(data_frame):
             new_state_list.append(value)
     data_frame['state_cleaned'] = new_state_list
     return(data_frame)
+
+
+# Takes a dataframe, filter column and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
+def control_column(df, filter_column, return_column, cutoffs):
+    dict_ = {}
+    cutoffs = [0] + cutoffs + [max(df[filter_column])]
+    
+    for i in range(0, len(cutoffs)-1):
+        dict_[i] = list(df[(df[filter_column].between(cutoffs[i], cutoffs[i+1], inclusive=True))][return_column])
+    
+    return dict_
