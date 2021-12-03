@@ -24,3 +24,25 @@ def percentile_breaker(df, percentile_break, col_name):
     group_2 = df.iloc[breakpoint:,:]
     
     return(group_1, group_2) 
+
+def control_for_experience(df, buckets):
+    #returns index breakpoints
+    #need to pass cutoffs to sorted df for this to work, folks ***important***
+    i=0
+    j=0
+    sorted_df = df.sort_values('yearsofexperience', ascending = True)
+    vals = list(sorted_df['yearsofexperience'])
+    cutoffs = []
+    
+    while i<len(buckets):
+        
+        while vals[j] <= buckets[i]:
+            
+            j+=1
+        
+        cutoffs.append(j)
+        
+        i+=1
+    
+    return (cutoffs)
+        
