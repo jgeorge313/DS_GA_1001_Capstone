@@ -144,10 +144,8 @@ def hypothesis_data_3(data_frame, cutoff_array):
         
     new_data_frame = data_frame.sort_values('yearsofexperience', ascending = True)
     new_data_frame['levels_of_experience'] = levels_of_experience    
-    region_keys = list(set(data_frame['region'].values.tolist()))[0:4]
-    buckets = [0,1,2,3]
     region_keys = list(set(new_data_frame['region'].values.tolist()))
-    region_keys = region_keys.remove('NA')
+    region_keys.remove('NA')
     buckets = list(range(len(cutoff_array)))
     final_keys =  list(itertools.product(region_keys, buckets))
     big_list = []
