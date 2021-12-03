@@ -45,6 +45,33 @@ def control_for_experience(df, buckets):
         i+=1
     
     return (cutoffs)
+
+def gender_control_experience_buckets(df, bucket_list):
+    
+    #bucket list is an array of buckets to group respondents by
+    #returns dictionary with experience bucket top value key and 2 arrays of salaries [female, male] as value
+    #relies on Jonah's original control for experience
+    
+    final_dict = dict()
+    filtered_df=df.dropna(subset = ['gender'])
+    filtered_df.sort_values('yearsofexperience')
+    filtered_male = filtered_df[filtered_df['gender'] == 'Male']
+    filtered_female = filtered_df[filtered_df['gender'] == 'Female']
+    filtered_male = filtered_male.sort_values('yearsofexperience')
+    filtered_female = filtered_female.sort_values('yearsofexperience')
+    
+    male_cutoffs = control_for_experience(filtered_male, bucket_list)
+    female_cutoffs = control_for_experience(filtered_female, bucket_list)
+    
+    i=0
+    while i < len(bucket_list):
+        
+        male_array = list(filtered_male['totalyearlycompensation'])[:male_cutoffs[i]]
+        female_array = list(filtered_female['totalyearlycompensation'])[:female_cutoffs[i]]
+        final_dict[bucket_list[i]]= [female_array, male_array]
+        i+=1
+        
+    return (final_dict)
         
 def extract_state(data_frame):
     """
