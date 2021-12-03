@@ -112,11 +112,15 @@ def extract_state(data_frame):
 
 
 # Takes a dataframe, filter column and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
-def control_column(df, filter_column, return_column, cutoffs):
+def control_column(df, control_column, filter_column, return_column, cutoffs):
     dict_ = {}
     cutoffs = [0] + cutoffs + [max(df[filter_column])]
     
     for i in range(0, len(cutoffs)-1):
-        dict_[i] = list(df[(df[filter_column].between(cutoffs[i], cutoffs[i+1], inclusive=True))][return_column])
+        temp = df[(df[control_column].between(cutoffs[i], cutoffs[i+1], inclusive='left'))]
+        low = temp[temp[filter_column] <= temp[filter_column].median()][return_column]
+        high = temp[temp[filter_column] > temp[filter_column].median()][return_column]
+        
+        dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [low, high]
     
     return dict_
