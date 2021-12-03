@@ -394,3 +394,56 @@ def tech_and_finance_salary_test(df):
         else: 
             print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
 
+def pca(data, stand=False, k=None, var=False):
+
+    cols = list(data.iloc[:0])
+    data_copy = data
+    # Center Data at 0, Each Column must have mean 0
+    
+    # Loop through every column
+    data_copy = data - data.mean()
+
+    # If we should standardize, then standardize the dataset
+    if stand == True:
+        data_copy = data_copy / data_copy.std()
+
+    # Compute Covariance Matrix
+    Cov_matrix = data_copy.T @ data_copy
+
+    # Calculate eigendecomp for Cov_Matrix
+    vals, vectors = np.linalg.eigh(Cov_matrix)
+
+    # Sort the eigenvalues descending order
+    vals = vals[::-1]
+    vectors = vectors[:, ::-1]
+
+    # If we wanted the least dimensions for a certain amount of variance explained
+
+    # See if Var was passed to function and its valid
+    if var > 0 and var <= 1:
+        tracker = 0
+        eig_vals_of_interest, eig_vectors_of_interest = [], []
+        total_var = vals.sum()
+        for i in range(len(vals)):
+            if tracker < var:
+                tracker += vals[i] / total_var
+                eig_vals_of_interest.append(vals[i])
+        eig_vectors_of_interest = vectors[:, :len(eig_vals_of_interest)]
+
+    # Check if we just wanted k dimensions
+    elif k > 0 and k <= len(cols):
+
+        # If we wanted k dimensions, set the appropriate amount
+        eig_vals_of_interest = vals[:k]
+        eig_vectors_of_interest = vectors[:, :k]
+    else:
+        return vals, vectors
+
+    # Make sure data types are compatible
+    eig_vectors_of_interest = np.array(eig_vectors_of_interest)
+
+    # Compute the data projected onto the pcas
+    new_data = data_copy@eig_vectors_of_interest
+
+    #Returns the data projected onto the pcas, the eigenvalues, and the eigenvectors (PCs) of the covariance matrix
+    return new_data, eig_vals_of_interest, eig_vectors_of_interest
