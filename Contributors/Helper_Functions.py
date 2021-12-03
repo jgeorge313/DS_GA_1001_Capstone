@@ -147,25 +147,23 @@ def hypothesis_data_3(data_frame, cutoff_array):
     region_keys = list(set(data_frame['region'].values.tolist()))[0:4]
     buckets = [0,1,2,3]
     region_keys = list(set(new_data_frame['region'].values.tolist()))
-    region_keys.remove('NA')
-
-
-    buckets = list(set(new_data_frame['levels_of_experience'].values.tolist()))
-
+    region_keys = region_keys.remove('NA')
+    buckets = list(range(len(cutoff_array)))
     final_keys =  list(itertools.product(region_keys, buckets))
     big_list = []
     for value in final_keys:
-        big_list.append(new_df.loc[(new_data_frame['region']== value[0]) & (new_data_frame['levels_of_experience']== value[1])]['totalyearlycompensation'].tolist())
+        big_list.append(new_data_frame.loc[(new_data_frame['region']== value[0]) & (new_data_frame['levels_of_experience']== value[1])]['totalyearlycompensation'].tolist())
 
     final_dict = dict(zip(final_keys, big_list))
     
     return(final_dict)
 
 
+
 # Takes a dataframe, filter column and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
-def hypothesis_data1(df, control_column, filter_column, return_column, cutoffs):
+def control_column(df, control_column, filter_column, return_column, cutoffs):
     dict_ = {}
-    cutoffs = [0] + cutoffs + [max(df[control_column])]
+    cutoffs = [0] + cutoffs + [max(df[filter_column])]
     
     for i in range(0, len(cutoffs)-1):
         temp = df[(df[control_column].between(cutoffs[i], cutoffs[i+1], inclusive='left'))]
@@ -173,21 +171,5 @@ def hypothesis_data1(df, control_column, filter_column, return_column, cutoffs):
         high = temp[temp[filter_column] > temp[filter_column].median()][return_column]
         
         dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [low, high]
-    
-    return dict_
-
-
-# Takes a dataframe, filter columns and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
-def hypothesis_data2(df, control_column1, control_column2, filter_column, return_column, cutoffs):
-    dict_ = {}
-    cutoffs = [0] + cutoffs + [max(df[control_column1])]
-    faang_list = ['Facebook', 'Apple', 'Amazon', 'Netflix', 'Google']
-    
-    for i in range(0, len(cutoffs)-1):
-        temp = df[(df[control_column1].between(cutoffs[i], cutoffs[i+1], inclusive='left')) & (df[control_column2] == 'Technology')]
-        faang = temp[temp[filter_column].isin(faang_list)][return_column]
-        nonfaang_tech = temp[~temp[filter_column].isin(faang_list)][return_column]
-        
-        dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [faang, nonfaang_tech]
     
     return dict_
