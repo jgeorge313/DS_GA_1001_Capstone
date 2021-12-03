@@ -24,7 +24,7 @@ To further refine our understanding we will investigate the following questions:
     4) Has the median annual salary increase for Data Science/Software Engineer increased more than annual inflation between 2017-2019
     5) How many years of experience is a Master's Degree worth (Howell)
     6) FAANG vs Non-FAANG (Tech) (Alex)
-    7) Finance vs FAANG (Giulio)
+    7) Finance vs Tech (Giulio)
 
     1) Predict salary from other factors
     2) Predict experience level from salary
