@@ -74,3 +74,11 @@ There are 62,000 rows and 29 columns, described below:
 ## Motivating Factor for this Project
 
 As Data Science graduate students at New York University's Center for Data Science, the team was naturally intrigued to learn what factors are most important with salaries of Data Science and STEM employees. 
+
+
+for key in test_input2.keys():
+    test = mannwhitneyu(test_input2[key][0], test_input2[key][1], alternative='two-sided') #Runs a Mann Whitney U-test
+    if test.pvalue < 0.05:
+        print('{} years of experience: We reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
+    else:
+        print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
