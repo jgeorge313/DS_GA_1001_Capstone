@@ -355,3 +355,42 @@ sector_dict = {'Google':'Technology',
 'Smartsheet':'Technology',
 'Trend Micro':'Technology',
 'Gusto':'Technology'}
+
+def tech_and_finance_salary_test(df):
+    #Grab salary data for companies that are in the Financials Sector
+    financial_df = raw_df[raw_df['sector']=='Financials']
+    
+    #Grab salary data for companies that are in the Technology Sector
+    technology_df = raw_df[raw_df['sector']=='Technology']
+                          
+    #Initialize two dicts to contain the arrays of data
+    fin_dict = {}
+    tech_dict = {}
+
+    #Initialize list for year of experience buckets
+    cutoffs = [0,5,10]
+    
+    #Loop through the financial salaries, and add to appropriate dictionary key
+    for i in range(len(cutoffs)-1):
+        fin_dict[str(cutoffs[i])+"-"+str(cutoffs[i+1])] = financial_df[(financial_df['yearsofexperience'] >= cutoffs[i]) & (financial_df['yearsofexperience'] < cutoffs[i+1])]['totalyearlycompensation']
+    
+    #Our loop doesn't grab the last band, so grab the last band outside the loop
+    fin_dict[str(cutoffs[-1])+'+'] = financial_df[financial_df['yearsofexperience'] > cutoffs[-1]]['totalyearlycompensation']
+    cutoffs = [0,5,10]
+    
+    #Loop through the tech salaries, and add to appropriate dictionary key
+    for i in range(len(cutoffs)-1):
+        tech_dict[str(cutoffs[i])+"-"+str(cutoffs[i+1])] = technology_df[(technology_df['yearsofexperience'] >= cutoffs[i]) & (technology_df['yearsofexperience'] < cutoffs[i+1])]['totalyearlycompensation']
+    
+    #Our loop doesn't grab the last band, so grab the last band outside the loop
+    tech_dict[str(cutoffs[-1])+'+'] = technology_df[technology_df['yearsofexperience'] > cutoffs[-1]]['totalyearlycompensation']
+    
+    for key in fin_dict.keys():
+        test = mannwhitneyu(tech_dict[key], fin_dict[key], alternative='two-sided') 
+        if test.pvalue < 0.05: 
+            print('{} years of experience: We reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue)) 
+            print('Tech median: ', np.median(np.array(tech_dict[key])))
+            print('Finance median: ', np.median(np.array(fin_dict[key])))
+        else: 
+            print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
+
