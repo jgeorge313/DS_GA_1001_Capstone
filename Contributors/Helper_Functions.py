@@ -396,7 +396,7 @@ def tech_and_finance_salary_test(df):
 
 def pca(data, stand=False, k=None, var=False):
     #Create a copy of data
-    data_copy = data
+    data_copy = data.copy()
     
     # Center Data at 0, Each Column must have mean 0
     data_copy = data - data.mean()
