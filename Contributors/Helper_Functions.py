@@ -13,7 +13,8 @@ Changelog:
     v4. Joby created function that outputs a dictionary that outputs regional salaries, controlling for experience
     ...
 """
-
+import numpy as np
+import pandas as pd
 import math
 import itertools 
 
