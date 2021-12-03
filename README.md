@@ -23,7 +23,7 @@ To further refine our understanding we will investigate the following questions:
     3) which locations have smaller companies
     4) highest total pay by location
     5) do people with high v low years at current co make more
-    6) Has the median Data Science/Software Engineer salaries increased more than annual inflation between 2017-2019
+    6) Has the median annual salary increase for Data Science/Software Engineer increased more than annual inflation between 2017-2019
     1) predict salary from other factors
     2) predict experience level from salary
     3) predict company from salary info
