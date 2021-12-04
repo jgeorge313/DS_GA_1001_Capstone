@@ -395,6 +395,8 @@ def tech_and_finance_salary_test(df):
             print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
 
 def pca(data, stand=False, k=None, var=False):
+    
+    cols = list(data.iloc[:0])
     #Create a copy of data
     data_copy = data.copy()
     
