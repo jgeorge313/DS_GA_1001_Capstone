@@ -196,165 +196,28 @@ def match_industry(df):
     return df
 
 #Sector_dict used for match_industry
-sector_dict = {'google': 'Technology',
- 'cisco': 'Technology',
- 'uber': 'Technology',
- 'capital one': 'Financials',
- 'linkedin': 'Technology',
- 'vmware': 'Technology',
- 'bloomberg': 'Technology',
- 'goldman sachs': 'Financials',
- 'paypal': 'Technology',
- 'deloitte': 'Business Services',
- 'walmart labs': 'Technology',
- 'accenture': 'Business Services',
- 'expedia': 'Technology',
- 'sap': 'Technology',
- 'dropbox': 'Technology',
- 'shopify': 'Technology',
- 'airbnb': 'Technology',
- 'atlassian': 'Technology',
- 'snap': 'Technology',
- 'yelp': 'Technology',
- 'yahoo': 'Technology',
- 'stripe': 'Technology',
- 'indeed': 'Technology',
- 'yandex': 'Technology',
- 'bytedance': 'Technology',
- 'zillow': 'Technology',
- 'spotify': 'Technology',
- 't-mobile': 'Telecommunications',
- 'pinterest': 'Technology',
- 'nutanix': 'Technology',
- 'doordash': 'Technology',
- 'amd': 'Technology',
- 'ernst and young': 'Business Services',
- 'qualtrics': 'Technology',
- 'samsung': 'Technology',
- 'cruise': 'Transportation',
- 'twilio': 'Telecommunications',
- 'instacart': 'Technology',
- 'booking.com': 'Technology',
- 'box': 'Technology',
- 'pwc': 'Business Services',
- 'coinbase': 'Technology',
- 'disney': 'Media',
- 'citi': 'Financials',
- 'arm': 'Technology',
- 'flipkart': 'Flipkart',
- 'epic systems': 'Technology',
- 'booz allen hamilton': 'Business Services',
- 'zalando': 'Technology',
- 'verizon': 'Telecommunications',
- 'slalom': 'Business Services',
- 'tableau software': 'Technology',
- 'mckinsey': 'Business Services',
- 'hubspot': 'Technology',
- 'wework': 'Technology',
- 'robinhood': 'Financials',
- 'docusign': 'Technology',
- 'compass': 'Food & Drug Stores',
- 'slack': 'Technology',
- 'kpmg': 'Business Services',
- 'grab': 'Technology',
- 'citrix systems inc': 'Technology',
- 'two sigma': 'Financials',
- 'palantir': 'Technology',
- 'barclays': 'Financials',
- 'hpe': 'Technology',
- 'tata consultancy services': 'Business Services',
- 'cognizant': 'Business Services',
- 'amazon': 'Technology',
- 'rubrik': 'Technology',
- 'okta': 'Technology',
- 'zendesk': 'Technology',
- 'etsy': 'Technology',
- 'rally health': 'Health Care',
- 'capgemini': 'Business Services',
- 'github': 'Technology',
- 'infosys': 'Business Services',
- 'bank of america merrill lynch': 'Financials',
- 'roblox': 'Technology',
- 'mathworks': 'Technology',
- 'hulu': 'Technology',
- 'blizzard entertainment': 'Media',
- 'roku': 'Technology',
- 'grubhub': 'Technology',
- 'waymo': 'Technology',
- 'nokia': 'Nokia',
- 'symantec': 'Technology',
- 'citadel': 'Financials',
- 'mediatek': 'MediaTek',
- 'fidelity investments': 'Financials',
- 'squarespace': 'Technology',
- 'datadog': 'Technology',
- 'ge digital': 'Technology',
- 'unity technologies': 'Technology',
- 'credit karma': 'Financials',
- 'adp': 'Financials',
- 'zoox': 'Motor Vehicles & Parts',
- 'akamai': 'Technology',
- 'publicis sapient': 'Business Services',
- 'cloudera': 'Technology',
- 'sofi': 'Financials',
- 'the home depot': 'Household Products',
- 'the new york times company': 'Media',
- 'optum': 'Health Care',
- 'audible': 'Technology',
- 'flexport': 'Industrials',
- 'nvidia': 'Technology',
- 'thoughtworks': 'Technology',
- 'wish': 'Technology',
- 'argo ai': 'Technology',
- 'bcg': 'Business Services',
- 'blue origin': 'Technology',
- 'shopee': 'Technology',
- 'aws': 'Technology',
- 'state farm': 'Financials',
- 'rivian': 'Technology',
- 'ericsson': 'Telecommunications',
- 'redfin': 'Technology',
- 'mozilla': 'Technology',
- 'marvell': 'Media',
- 'samsara': 'Technology',
- 'affirm': 'Financials',
- 'pivotal': 'Technology',
- 'deutsche bank': 'Financials',
- 'ey': 'Business Services',
- 'siemens': 'Technology',
- 'mongodb': 'Technology',
- 'bny mellon': 'Financials',
- 'klarna': 'Financials',
- 'exxonmobil': 'Energy',
- 'twitch': 'Technology',
- 'reddit': 'Technology',
- 'ubs': 'Financials',
- 'bain': 'Business Services',
- 'convoy': 'Technology',
- 'plaid': 'Financials',
- 'pure storage': 'Technology',
- 'vanguard': 'Financials',
- 'honeywell': 'Industrials',
- 'asml': 'ASML',
- 'riot games': 'Media',
- 'pandora': 'Technology',
- 'rakuten': 'Technology',
- 'delivery hero': 'ASML',
- 'factset': 'Financials',
- 'skyscanner': 'Technology',
- 'asurion': 'Technology',
- 'asana': 'Technology',
- 'carta': 'Technology',
- 'alibaba': 'Technology',
- 'informatica': 'Technology',
- 'databricks': 'Technology',
- 'surveymonkey': 'Technology',
- 'cox automotive': 'Motor Vehicles & Parts',
- 'ancestry': 'Technology',
- 'cloudflare': 'Technology',
- 'smartsheet': 'Technology',
- 'trend micro': 'Technology',
- 'gusto': 'Technology'}
+sector_dict = {'google': 'Technology', 'cisco': 'Technology', 'uber': 'Technology', 'capital one': 'Financials', 'linkedin': 'Technology', 'vmware': 'Technology', 'bloomberg': 'Technology', 'goldman sachs': 'Financials',
+               'paypal': 'Technology', 'deloitte': 'Business Services', 'walmart labs': 'Technology', 'accenture': 'Business Services', 'expedia': 'Technology', 'sap': 'Technology',
+               'dropbox': 'Technology', 'shopify': 'Technology', 'airbnb': 'Technology', 'atlassian': 'Technology', 'snap': 'Technology', 'yelp': 'Technology', 'yahoo': 'Technology', 'stripe': 'Technology',
+               'indeed': 'Technology', 'yandex': 'Technology', 'bytedance': 'Technology', 'zillow': 'Technology', 'spotify': 'Technology', 't-mobile': 'Telecommunications', 'pinterest': 'Technology', 
+               'nutanix': 'Technology', 'doordash': 'Technology', 'amd': 'Technology', 'ernst and young': 'Business Services', 'qualtrics': 'Technology', 'samsung': 'Technology', 'cruise': 'Transportation', 
+               'twilio': 'Telecommunications', 'instacart': 'Technology', 'booking.com': 'Technology', 'box': 'Technology', 'pwc': 'Business Services', 'coinbase': 'Technology', 'disney': 'Media', 'citi': 'Financials', 
+               'arm': 'Technology', 'flipkart': 'Retailing', 'epic systems': 'Technology', 'booz allen hamilton': 'Business Services', 'zalando': 'Technology', 'verizon': 'Telecommunications', 'slalom': 'Business Services',
+               'tableau software': 'Technology', 'mckinsey': 'Business Services', 'hubspot': 'Technology', 'wework': 'Technology', 'robinhood': 'Financials', 'docusign': 'Technology', 'compass': 'Food & Drug Stores', 
+               'slack': 'Technology', 'kpmg': 'Business Services', 'grab': 'Technology', 'citrix systems inc': 'Technology', 'two sigma': 'Financials', 'palantir': 'Technology', 'barclays': 'Financials', 'hpe': 'Technology', 
+               'tata consultancy services': 'Business Services', 'cognizant': 'Business Services', 'amazon': 'Technology', 'rubrik': 'Technology', 'okta': 'Technology', 'zendesk': 'Technology', 'etsy': 'Technology', 
+               'rally health': 'Health Care', 'capgemini': 'Business Services', 'github': 'Technology', 'infosys': 'Business Services', 'bank of america merrill lynch': 'Financials', 'roblox': 'Technology', 
+               'mathworks': 'Technology', 'hulu': 'Technology', 'blizzard entertainment': 'Media', 'roku': 'Technology', 'grubhub': 'Technology', 'waymo': 'Technology', 'nokia': 'Technology', 'symantec': 'Technology', 
+               'citadel': 'Financials', 'mediatek': 'MediaTek', 'fidelity investments': 'Financials', 'squarespace': 'Technology', 'datadog': 'Technology', 'ge digital': 'Technology', 'unity technologies': 'Technology', 
+               'credit karma': 'Financials', 'adp': 'Financials', 'zoox': 'Motor Vehicles & Parts', 'akamai': 'Technology', 'publicis sapient': 'Business Services', 'cloudera': 'Technology', 'sofi': 'Financials', 
+               'the home depot': 'Household Products', 'the new york times company': 'Media', 'optum': 'Health Care', 'audible': 'Technology', 'flexport': 'Industrials', 'nvidia': 'Technology', 'thoughtworks': 'Technology', 
+               'wish': 'Technology',  'argo ai': 'Technology', 'bcg': 'Business Services', 'blue origin': 'Technology', 'shopee': 'Technology', 'aws': 'Technology', 'state farm': 'Financials', 'rivian': 'Technology', 
+               'ericsson': 'Telecommunications', 'redfin': 'Technology', 'mozilla': 'Technology', 'marvell': 'Media', 'samsara': 'Technology', 'affirm': 'Financials', 'pivotal': 'Technology', 
+               'deutsche bank': 'Financials', 'ey': 'Business Services', 'siemens': 'Technology', 'mongodb': 'Technology', 'bny mellon': 'Financials', 'klarna': 'Financials', 'exxonmobil': 'Energy', 'twitch': 'Technology', 
+               'reddit': 'Technology', 'ubs': 'Financials', 'bain': 'Business Services', 'convoy': 'Technology', 'plaid': 'Financials', 'pure storage': 'Technology', 'vanguard': 'Financials', 'honeywell': 'Industrials', 
+               'asml': 'ASML', 'riot games': 'Media', 'pandora': 'Technology', 'rakuten': 'Technology', 'delivery hero': 'ASML', 'factset': 'Financials', 'skyscanner': 'Technology', 'asurion': 'Technology', 
+               'asana': 'Technology', 'carta': 'Technology', 'alibaba': 'Technology', 'informatica': 'Technology', 'databricks': 'Technology', 'surveymonkey': 'Technology', 'cox automotive': 'Motor Vehicles & Parts', 
+               'ancestry': 'Technology', 'cloudflare': 'Technology', 'smartsheet': 'Technology', 'trend micro': 'Technology', 'gusto': 'Technology'}
 
 def tech_and_finance_salary_test(df):
     #Grab salary data for companies that are in the Financials Sector
@@ -447,3 +310,37 @@ def pca(data, stand=False, k=None, var=False):
 
     #Returns the data projected onto the pcas, the eigenvalues, and the eigenvectors (PCs) of the covariance matrix
     return new_data, eig_vals_of_interest, eig_vectors_of_interest
+
+
+def ForwardSelection(df_features, target):
+    from pingouin import linear_regression
+    
+    remaining_features = list(df_features.columns)
+    chosen_features = list()
+
+    while len(remaining_features) > 0:
+        selected_feature = None
+        best_SSE = 0
+
+        for feature in remaining_features:
+            try_model = pd.concat([df_features[chosen_features], df_features[feature]], axis=1)
+
+            linreg = linear_regression(try_model, target)
+            y_train_pred = pd.Series(list((try_model @ linreg['coef'][1:].array + linreg['coef'][0]).values))
+
+            feature_SSE = np.sum((target.mean()-y_train_pred)**2)
+            feature_pval = float(linreg['pval'][-1:])
+
+            if feature_pval < 0.05 and best_SSE < feature_SSE:
+                best_SSE = feature_SSE
+                best_pvalue = feature_pval
+                selected_feature = feature
+                
+        print('Chosen feature: {} (with SSE: {} and p-value: {})'.format(selected_feature, int(best_SSE), round(feature_pval,5)))
+        
+        if selected_feature == None: break
+            
+        chosen_features.append(selected_feature)   
+        remaining_features.remove(selected_feature)
+        
+    return chosen_features
