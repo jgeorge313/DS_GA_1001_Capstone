@@ -407,7 +407,7 @@ def pca(data, stand=False, k=None, var=False):
 
     # Compute Covariance Matrix
     Cov_matrix = data_copy.T @ data_copy
-
+    Cov_matrix = Cov_matrix / (len(data_copy)-1)
     # Calculate eigendecomp for Cov_Matrix
     vals, vectors = np.linalg.eigh(Cov_matrix)
 
