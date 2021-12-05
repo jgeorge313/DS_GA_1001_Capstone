@@ -6,6 +6,10 @@
 ### By Giulio Duregon, Joby George, Howell Lu, Jonah Poczobutt, Alexandre Vives
 ### Due 12/22/201
 
+# Write-up Location
+
+For a full write-up of the project, go to the following [google docs](https://docs.google.com/document/d/1cNr9mMmF3b0EuZzc6ek0Cd8W22jxeAhYq-UoMxkGgTk/edit?usp=sharing)
+
 # Goals of the project
 
 The main goals of this project are to:
