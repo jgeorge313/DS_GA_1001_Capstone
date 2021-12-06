@@ -189,6 +189,8 @@ def hypothesis_data3(data_frame, cutoff_array):
     return(final_dict)
 
 def hypothesis_data4 (df,bucketlist):
+    
+    bucketlist = [0] + bucketlist + [100]
     filtered_df=df.dropna(subset = ['Education'])
     filtered_HS = filtered_df[filtered_df['Education'] == "Highschool"]
     filtered_HS = filtered_HS.sort_values('yearsofexperience')
@@ -210,9 +212,14 @@ def hypothesis_data4 (df,bucketlist):
             masterarray.append(list(filtered_master['totalyearlycompensation'][(filtered_master['yearsofexperience']>=bucketlist[i]) & (filtered_master['yearsofexperience']<bucketlist[i+1])]))
             phdarray.append(list(filtered_phd['totalyearlycompensation'][(filtered_phd['yearsofexperience']>=bucketlist[i]) & (filtered_phd['yearsofexperience']<bucketlist[i+1])]))
             i=i+1
-            
-    return hsarray,collegearray,masterarray,phdarray
-
+         
+    j = 0
+    dict_ = {}    
+    while j < len(hsarray):
+        dict_[str(bucketlist[j]) + '-' + str(bucketlist[j+1])] = [hsarray[j],collegearray[j],masterarray[j],phdarray[j]]
+        j += 1
+        
+    return dict_
 
 #Takes a dataframe, matches 161 company names for their industry, returns the altered dataframe
 #Uses Sector Dict
