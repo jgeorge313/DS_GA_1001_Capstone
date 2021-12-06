@@ -146,7 +146,7 @@ def hypothesis_data2(df, control_column1, control_column2, filter_column, return
     
     return dict_
 
-def hypothesis_data_3(data_frame, cutoff_array):
+def hypothesis_data3(data_frame, cutoff_array):
     """
     takes in a dataframe and creates a region column for the data, if it does not exist continue,
     input an array to look at experience cutoff groups and then return a dictionary that 
@@ -187,6 +187,32 @@ def hypothesis_data_3(data_frame, cutoff_array):
     final_dict = dict(zip(final_keys, big_list))
     
     return(final_dict)
+
+def hypothesis_data4 (df,bucketlist):
+    filtered_df=df.dropna(subset = ['Education'])
+    filtered_HS = filtered_df[filtered_df['Education'] == "Highschool"]
+    filtered_HS = filtered_HS.sort_values('yearsofexperience')
+    filtered_bachelor = filtered_df[filtered_df['Education'] == "Bachelor's Degree"]
+    filtered_bachelor = filtered_bachelor.sort_values('yearsofexperience')
+    filtered_master = filtered_df[filtered_df['Education'] == "Master's Degree"]
+    filtered_master = filtered_master.sort_values('yearsofexperience')
+    filtered_phd = filtered_df[filtered_df['Education'] == "PhD"]
+    filtered_phd = filtered_phd.sort_values('yearsofexperience')
+    
+    hsarray = []
+    collegearray = []
+    masterarray = []
+    phdarray = []
+    i=0
+    while i < len(bucketlist)-1:
+            hsarray.append(list(filtered_HS['totalyearlycompensation'][(filtered_HS['yearsofexperience']>=bucketlist[i]) & (filtered_HS['yearsofexperience']<bucketlist[i+1])]))
+            collegearray.append(list(filtered_bachelor['totalyearlycompensation'][(filtered_bachelor['yearsofexperience']>=bucketlist[i]) & (filtered_bachelor['yearsofexperience']<bucketlist[i+1])]))
+            masterarray.append(list(filtered_master['totalyearlycompensation'][(filtered_master['yearsofexperience']>=bucketlist[i]) & (filtered_master['yearsofexperience']<bucketlist[i+1])]))
+            phdarray.append(list(filtered_phd['totalyearlycompensation'][(filtered_phd['yearsofexperience']>=bucketlist[i]) & (filtered_phd['yearsofexperience']<bucketlist[i+1])]))
+            i=i+1
+            
+    return hsarray,collegearray,masterarray,phdarray
+
 
 #Takes a dataframe, matches 161 company names for their industry, returns the altered dataframe
 #Uses Sector Dict
