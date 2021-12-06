@@ -86,6 +86,7 @@ def extract_state(data_frame):
     data_frame['state_clean'] = new_state_list
     data_frame['region'] = new_region_list
     data_frame.loc[data_frame['state_clean']!='NA']
+    data_frame.drop('state_clean', axis=1, inplace=True)
   
     return(data_frame)
 
