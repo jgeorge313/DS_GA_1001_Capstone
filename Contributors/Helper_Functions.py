@@ -216,7 +216,7 @@ def hypothesis_data5(data_frame, cutoff_array):
     final_keys =  list(itertools.product(region_keys, buckets))
     big_list = []
     for value in final_keys:
-        big_list.append(new_data_frame.loc[(new_data_frame['region']== str(value[0])) & (new_data_frame['levels_of_experience']== str(value[1]))]['totalyearlycompensation'].tolist())
+        big_list.append(new_data_frame.loc[(new_data_frame['region']== str(value[0])) & (new_data_frame['levels_of_experience']== value[1])]['totalyearlycompensation'].tolist())
 
     final_dict = dict(zip(final_keys, big_list))
     
