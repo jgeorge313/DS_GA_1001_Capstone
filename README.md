@@ -86,3 +86,16 @@ for key in test_input2.keys():
         print('{} years of experience: We reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
     else:
         print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
+        
+       
+        regional_dict = hypothesis_data3(df,[3,7,10])
+        for key in regional_dict.keys(): 
+            value_1 = regional_dict[key]
+            for key2 in regional_dict.keys():
+                value_2 = regional_dict[key2]
+                if (key[0] != key2[0]) & (key[1] == key2[1]):
+                    test = mannwhitneyu(regional_dict[key], regional_dict[key2], alternative='two-sided') 
+                    if test.pvalue < 0.001:
+                        print('Comparing {} with {}: We reject the Null Hypothesis (p-value = {})'.format(key, key2 ,test.pvalue))
+                    else: 
+                        print('Comparing {} with {}: We fail to reject the Null Hypothesis (p-value = {})'.format(key,key2, test.pvalue))
