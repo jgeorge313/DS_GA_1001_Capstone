@@ -104,7 +104,6 @@ def hypothesis_data1(df, control_column, filter_column, return_column, cutoffs):
     
     return dict_
 
-
 # Takes a dataframe, filter columns and specific cutoffs as input and ouputs a dictionary of lists where each list is the target column filtered.
 def hypothesis_data2(df, control_column1, control_column2, filter_column, return_column, cutoffs):
     dict_ = {}
@@ -379,3 +378,9 @@ def ForwardSelection(df_features, target):
         remaining_features.remove(selected_feature)
         
     return chosen_features
+
+def faang(df):
+    faang_list = ['facebook', 'apple', 'amazon', 'netflix', 'google']
+    
+    df['faang'] = np.where(df['company'].isin(faang_list), 1, 0)
+    return df
