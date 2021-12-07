@@ -382,5 +382,5 @@ def ForwardSelection(df_features, target):
 def faang(df):
     faang_list = ['facebook', 'apple', 'amazon', 'netflix', 'google']
     
-    df['faang'] = np.where(df['company'].isin(faang_list), 1, 0)
+    df['faang'] = np.where(df['company'].isin(faang_list), 'faang', 'non_faang')
     return df
