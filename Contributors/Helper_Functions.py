@@ -254,6 +254,9 @@ sector_dict = {'google': 'Technology', 'cisco': 'Technology', 'uber': 'Technolog
                'ancestry': 'Technology', 'cloudflare': 'Technology', 'smartsheet': 'Technology', 'trend micro': 'Technology', 'gusto': 'Technology'}
 
 def tech_and_finance_salary_test(df):
+    
+    # Significance tests
+    from scipy.stats import mannwhitneyu
     #Grab salary data for companies that are in the Financials Sector
     financial_df = df[df['sector']=='Financials']
     
