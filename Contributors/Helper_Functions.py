@@ -285,15 +285,8 @@ def tech_and_finance_salary_test(df):
     #Our loop doesn't grab the last band, so grab the last band outside the loop
     tech_dict[str(cutoffs[-1])+'+'] = technology_df[technology_df['yearsofexperience'] > cutoffs[-1]]['totalyearlycompensation']
     
-    for key in fin_dict.keys():
-        test = mannwhitneyu(tech_dict[key], fin_dict[key], alternative='two-sided') 
-        if test.pvalue < 0.05: 
-            print('{} years of experience: We reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue)) 
-            print('Tech median: ', np.median(np.array(tech_dict[key])))
-            print('Finance median: ', np.median(np.array(fin_dict[key])))
-        else: 
-            print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
-
+    return tech_dict, fin_dict
+ 
 def pca(data, stand=False, k=None, var=False):
     
     cols = list(data.iloc[:0])
