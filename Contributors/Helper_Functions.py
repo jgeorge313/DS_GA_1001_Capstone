@@ -255,10 +255,10 @@ sector_dict = {'google': 'Technology', 'cisco': 'Technology', 'uber': 'Technolog
 
 def tech_and_finance_salary_test(df):
     #Grab salary data for companies that are in the Financials Sector
-    financial_df = raw_df[raw_df['sector']=='Financials']
+    financial_df = df[df['sector']=='Financials']
     
     #Grab salary data for companies that are in the Technology Sector
-    technology_df = raw_df[raw_df['sector']=='Technology']
+    technology_df = df[df['sector']=='Technology']
                           
     #Initialize two dicts to contain the arrays of data
     fin_dict = {}
