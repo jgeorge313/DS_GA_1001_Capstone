@@ -384,3 +384,23 @@ def faang(df):
     
     df['faang'] = np.where(~df['company'].isin(faang_list), 'non_faang', 'faang')
     return df
+
+def extract_year(df):
+    #have to call this function before we drop timestamp
+    df['timestamp'] = pd.to_datetime(df.timestamp, format= "%m/%d/%Y %H:%M:%S")
+    df['year'] = df['timestamp'].dt.year
+    return(df)
+
+def extract_tag(df):
+    tag_list = df['tag'].value_counts()[0:10].index.tolist()
+    tag_values = df['tag'].value_counts()[0:10].index.tolist()
+    other_tag_keys = df['tag'].value_counts()[10:].index.tolist()
+    other_tag = ['other']*len(other_tag_keys)
+    tag_list.extend(other_tag_keys)
+    tag_values.extend(other_tag)
+    tag_dict = dict(zip(tag_list, tag_values))
+
+    for i in tag_dict:
+        df.loc[df.tag==str(i),'tag'] = tag_dict[i]
+    return(df)
+
