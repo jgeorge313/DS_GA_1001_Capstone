@@ -155,7 +155,6 @@ def hypothesis_data2(df, control_column1, control_column2, filter_column, return
         nonfaang_tech = temp[~temp[filter_column].isin(faang_list)][return_column]
         
         dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [faang, nonfaang_tech]
-        print(faang)
     return dict_
 
 def hypothesis_data3(df, bucket_list):
