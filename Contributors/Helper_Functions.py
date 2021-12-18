@@ -210,7 +210,10 @@ def hypothesis_data5(data_frame, cutoff_array):
     new_data_frame = data_frame.sort_values('yearsofexperience', ascending = True)
     new_data_frame['levels_of_experience'] = levels_of_experience    
     region_keys = list(set(new_data_frame['region'].values.tolist()))
-    region_keys.remove('NA')
+    try:
+        region_keys.remove('NA')
+    except:
+        pass
     buckets = list(set(new_data_frame['levels_of_experience'].values.tolist()))
     final_keys =  list(itertools.product(region_keys, buckets))
     big_list = []
