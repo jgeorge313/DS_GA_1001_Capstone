@@ -17,6 +17,8 @@ import numpy as np
 import pandas as pd
 import math
 import itertools 
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 #Takes in the number of features to plot and returns the x and y values for the join plot
 def plotsize_check(features_length):
