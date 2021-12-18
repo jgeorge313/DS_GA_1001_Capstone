@@ -294,7 +294,7 @@ sector_dict = {'google': 'Technology', 'cisco': 'Technology', 'uber': 'Technolog
                'asana': 'Technology', 'carta': 'Technology', 'alibaba': 'Technology', 'informatica': 'Technology', 'databricks': 'Technology', 'surveymonkey': 'Technology', 'cox automotive': 'Motor Vehicles & Parts', 
                'ancestry': 'Technology', 'cloudflare': 'Technology', 'smartsheet': 'Technology', 'trend micro': 'Technology', 'gusto': 'Technology'}
 
-def tech_and_finance_salary_test(df):
+def hypothesis_data6(df):
     
     # Significance tests
     from scipy.stats import mannwhitneyu
