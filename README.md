@@ -80,23 +80,60 @@ There are 62,000 rows and 29 columns, described below:
 As Data Science graduate students at New York University's Center for Data Science, the team was naturally intrigued to learn what factors are most important with salaries of Data Science and STEM employees. 
 
 
-for key in test_input2.keys():
-    test = mannwhitneyu(test_input2[key][0], test_input2[key][1], alternative='two-sided') #Runs a Mann Whitney U-test
-    if test.pvalue < 0.05:
-        print('{} years of experience: We reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
-    else:
-        print('{} years of experience: We fail to reject the Null Hypothesis (p-value = {})'.format(key, test.pvalue))
-        
-       
+    from sklearn.model_selection import train_test_split
+    from sklearn.model_selection import RepeatedKFold
+    from sklearn.linear_model import LassoCV
 
-        test_input5 = hypothesis_data5(df,[5,10,15])
-        for key in test_input5.keys(): 
-            value_1 = test_input5[key]
-            for key2 in test_input5.keys():
-                value_2 = test_input5[key2]
-                if (key[0] != key2[0]) & (key[1] == key2[1]):
-                    test = mannwhitneyu(test_input5[key], test_input5[key2], alternative='two-sided') 
-                    if test.pvalue < 0.001:
-                        print('Comparing {} with {}: We reject the Null Hypothesis (p-value = {})'.format(key, key2 ,test.pvalue))
-                    else: 
-                        print('Comparing {} with {}: We fail to reject the Null Hypothesis (p-value = {})'.format(key,key2, test.pvalue))
+    x_train, x_test, y_train, y_test = train_test_split(
+    onehot_df_salary, target_salary, test_size=0.1, random_state=42)
+
+    cva = RepeatedKFold(n_splits=10,n_repeats = 3, random_state=42)
+
+
+
+    model = LassoCV(alphas=np.arange(0.001,1,.0001), cv=cva,n_jobs=-1)
+    model.fit(x_train,y_train)
+    print(model.alpha_)
+    
+    kf = KFold(n_splits=10, shuffle=True, random_state=101)
+    kf.get_n_splits(onehot_df_salary)
+
+
+    train_error, test_error, R_squared = [], [], []
+
+    for train_index, test_index in kf.split(onehot_df_salary):
+        X_train, X_test = onehot_df_salary.iloc[train_index], onehot_df_salary.iloc[test_index]
+        y_train, y_test = target_salary.iloc[train_index], target_salary.iloc[test_index]
+
+
+        #linreg = sm.OLS(y_train,sm.add_constant(X_train)).fit()
+
+        lasso = linear_model.Lasso(alpha=.001)
+        lasso.fit(X_train, y_train)
+
+        train_ypred = lasso.predict(X_train)
+
+        test_ypred = lasso.predict(X_test)
+
+        train_error.append(mean_squared_error(train_ypred,y_train))
+
+        test_error.append(mean_squared_error(test_ypred,y_test))
+
+        R_squared.append(lasso.score(X_test, y_test))
+
+        #y_train_pred = linreg.predict(sm.add_constant(X_train[column_subset]))
+
+        #y_test_pred = linreg.predict(sm.add_constant(X_test[column_subset]))
+
+
+    print('Training MSE for this Lasso Regression model: {}'.format(round(np.mean(train_error), 3)))
+    print('Testing MSE for this Lasso Regression model: {}\n'.format(round(np.mean(test_error), 3)))
+    print('R^2: {}\n'.format(round(np.mean(R_squared), 3)))
+
+    #print(linreg.summary())
+
+    lasso_df = pd.DataFrame(lasso.coef_, onehot_df_salary.columns, columns=['regression_coef'])
+    
+    #in new cells, you can keep them commented out
+    display(lasso_df.sort_values(by = 'regression_coef')[0:30])
+    display(lasso_df.sort_values(by = 'regression_coef')[30:])
