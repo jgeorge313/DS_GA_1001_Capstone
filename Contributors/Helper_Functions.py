@@ -147,7 +147,7 @@ def hypothesis_data1(df, control_column, filter_column, return_column, cutoffs):
 def hypothesis_data2(df, control_column1, control_column2, filter_column, return_column, cutoffs):
     dict_ = {}
     cutoffs = [0] + cutoffs + [max(df[control_column1])]
-    faang_list = ['Facebook', 'Apple', 'Amazon', 'Netflix', 'Google']
+    faang_list = ['facebook', 'apple', 'amazon', 'netflix', 'google']
     
     for i in range(0, len(cutoffs)-1):
         temp = df[(df[control_column1].between(cutoffs[i], cutoffs[i+1], inclusive='left')) & (df[control_column2] == 'Technology')]
@@ -155,7 +155,7 @@ def hypothesis_data2(df, control_column1, control_column2, filter_column, return
         nonfaang_tech = temp[~temp[filter_column].isin(faang_list)][return_column]
         
         dict_[str(cutoffs[i]) + '-' + str(cutoffs[i+1])] = [faang, nonfaang_tech]
-    
+        print(faang)
     return dict_
 
 def hypothesis_data3(df, bucket_list):
