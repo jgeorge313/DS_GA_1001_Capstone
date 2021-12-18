@@ -18,6 +18,43 @@ import pandas as pd
 import math
 import itertools 
 
+#Takes in the number of features to plot and returns the x and y values for the join plot
+def plotsize_check(features_length):
+    if features_length == 2:
+        result = (1, 2)
+    elif features_length == 4:
+        result = (2, 2)
+    elif features_length == 5:
+        result = (2, 3)
+    else:
+        if features_length % 4 == 0:
+            result = (int(features_length/4), 4)
+        elif features_length % 3 == 0:
+            result = (int(features_length/3), 3)
+        else:
+            result = (int(np.ceil(features_length/4)), 4)
+
+    return result[0], result[1]
+
+#Takes the dataframe and a list with the categorical columns and plots them using seaborn's countplot
+def plot_features(df, feature_list, is_categorical=True, compare_feature=None):
+    rows, columns = plotsize_check(len(feature_list))
+    fig, axes = plt.subplots(rows, columns, figsize=(7*columns, 8*rows))
+
+    for i in range(0,rows):
+        for j in range(0,columns):
+            if i*columns + j == len(feature_list): break
+            
+            if is_categorical == True and compare_feature != None:
+                sns.countplot(ax=axes[i, j], x=df[feature_list[i*columns+j]], hue = df[compare_feature], palette='mako')
+                axes[i, j].set_title(feature_list[i*columns+j])
+            elif is_categorical == True and compare_feature == None:
+                sns.countplot(ax=axes[i, j], x=df[feature_list[i*columns+j]], palette='mako')
+                axes[i, j].set_title(feature_list[i*columns+j])
+            else: 
+                sns.kdeplot(ax=axes[i, j], x=df[feature_list[i*columns+j]], shade=True)
+                axes[i, j].set_title(feature_list[i*columns+j])
+
 def percentile_breaker(df, percentile_break, col_name):
     #breaks sorted dataset on a certain percentile...this will be useful for testing salaries at small v large companies, ask Jonah for more info
     #returns dataframe split at proper percentile
